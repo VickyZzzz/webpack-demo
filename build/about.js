@@ -108,7 +108,7 @@ if(false) {
  * Created by zhang.yanping on 2017/4/28.
  */
 __webpack_require__(0);
-document.write("<p>你好</p>");
+document.write("这是about页面");
 
 var a = 111;
 var b = 222;
