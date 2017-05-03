@@ -1,7 +1,5 @@
-/**
- * Created by zhang.yanping on 2017/4/28.
- */
 require('./about.css');
+require("../pub/pub.js");
 document.write("这是about页面");
 
 

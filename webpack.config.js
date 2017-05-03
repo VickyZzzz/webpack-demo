@@ -1,6 +1,3 @@
-/**
- * Created by zhang.yanping on 2017/4/28.
- */
 var path = require('path');
 var HtmlwebpackPlugin = require('html-webpack-plugin');
 module.exports = {
@@ -14,9 +11,25 @@ module.exports = {
     },
     module:{
         loaders:[
+            // {
+            //     test:/\.css$/,
+            //     loaders:['style-loader','css-loader'],
+            //     // loaders: '"style-loader!css-loader!postcss-loader"'
+            // },
             {
-                test:/\.css$/,
-                loaders:['style-loader','css-loader'],
+                test: /\.css$/,
+                use: [
+                    'style-loader', 'css-loader', {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: function() {
+                                return [
+                                    require('autoprefixer')
+                                ];
+                            }
+                        }
+                    }
+                ]
             },
             {
                 test: /\.js$/,
@@ -39,4 +52,11 @@ module.exports = {
             filename:"about.html",
         })
     ],
+    devServer: {
+        contentBase: "./src",//本地服务器所加载的页面所在的目录
+        colors: true,//终端中输出结果为彩色
+        historyApiFallback: true,//不跳转
+        inline: true//实时刷新
+    },
+
 };
