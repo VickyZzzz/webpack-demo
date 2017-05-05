@@ -1,4 +1,5 @@
 var path = require('path');
+var webpack = require('webpack');
 var HtmlwebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry:{
@@ -41,22 +42,23 @@ module.exports = {
     },
     plugins:[
         new HtmlwebpackPlugin({
-            chunks:['index'], //对应接入的js文件
+            chunks:['index','common.js'], //对应接入的js文件
             title:"Hello World app",
             filename:'index.html',
             // template:""    //自动生成html文件的模板
         }),
         new HtmlwebpackPlugin({
-            chunks:["about"],
+            chunks:["about",'common.js'],
             title:"about",
             filename:"about.html",
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'common',
+            filename:"common.js",
+           chunks:['index','about']
         })
+
     ],
-    devServer: {
-        contentBase: "./src",//本地服务器所加载的页面所在的目录
-        colors: true,//终端中输出结果为彩色
-        historyApiFallback: true,//不跳转
-        inline: true//实时刷新
-    },
+
 
 };
